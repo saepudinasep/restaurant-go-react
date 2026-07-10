@@ -96,11 +96,13 @@ migrate -path migrations -database "mysql://root:PASSWORD_KAMU@tcp(127.0.0.1:330
 
 3 user contoh yang akan ter-seed:
 
-| Role    | Email                  | Password    |
-| ------- | ---------------------- | ----------- |
-| admin   | admin@restaurant.com   | password123 |
-| chef    | chef@restaurant.com    | password123 |
-| cashier | cashier@restaurant.com | password123 |
+| Role    | Email                         | Password    |
+| ------- | ----------------------------- | ----------- |
+| admin   | admin@smkrestaurant.sch.id    | password123 |
+| chef    | chef1@smkrestaurant.sch.id    | password123 |
+| chef    | chef2@smkrestaurant.sch.id    | password123 |
+| cashier | cashier1@smkrestaurant.sch.id | password123 |
+| cashier | cashier2@smkrestaurant.sch.id | password123 |
 
 ---
 
@@ -133,7 +135,7 @@ Contoh request login:
 ```bash
 curl -X POST http://localhost:8080/api/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"email":"admin@restaurant.com","password":"password123"}'
+  -d '{"email":"admin@smkrestaurant.sch.id","password":"password123"}'
 ```
 
 Contoh memanggil endpoint terproteksi:
