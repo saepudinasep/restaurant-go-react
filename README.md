@@ -1,6 +1,6 @@
-# School App — React + Golang + MySQL (Clean Architecture)
+# Restaurant — React + Golang + MySQL (Clean Architecture)
 
-Contoh project login multi-role (**admin, guru, siswa**) dengan JWT bearer token,
+Contoh project login multi-role (**admin, chef, cashier**) dengan JWT bearer token,
 middleware role-based, dan dashboard sederhana per role.
 
 ## Struktur Project
@@ -58,6 +58,7 @@ mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS school_app CHARACTER SET utf8
 ### b. Install CLI `migrate`
 
 **Windows (via Scoop, direkomendasikan):**
+
 ```powershell
 scoop install migrate
 ```
@@ -67,6 +68,7 @@ https://github.com/golang-migrate/migrate/releases
 → cari file `migrate.windows-amd64.zip`, ekstrak, taruh `migrate.exe` di folder yang ada di PATH (atau langsung di folder `backend/`, lalu panggil pakai `.\migrate.exe`).
 
 Cek instalasi:
+
 ```powershell
 migrate -version
 ```
@@ -74,27 +76,31 @@ migrate -version
 ### c. Jalankan migrasi
 
 Dari dalam folder `backend/`:
+
 ```powershell
-migrate -path migrations -database "mysql://root:PASSWORD_KAMU@tcp(127.0.0.1:3306)/school_app" up
+migrate -path migrations -database "mysql://root:PASSWORD_KAMU@tcp(127.0.0.1:3306)/restaurant_go_react" up
 ```
+
 Ganti `PASSWORD_KAMU` dengan password MySQL kamu (kalau tidak ada password, hapus `:PASSWORD_KAMU`).
 
 Ini akan menjalankan file di `migrations/`:
+
 - `000001_create_users_table.up.sql` → membuat tabel `users`
-- `000002_seed_default_users.up.sql` → mengisi 3 user contoh (admin, guru, siswa)
+- `000002_seed_default_users.up.sql` → mengisi 3 user contoh (admin, chef, cashier)
 
 Untuk rollback (undo migrasi terakhir):
+
 ```powershell
-migrate -path migrations -database "mysql://root:PASSWORD_KAMU@tcp(127.0.0.1:3306)/school_app" down 1
+migrate -path migrations -database "mysql://root:PASSWORD_KAMU@tcp(127.0.0.1:3306)/restaurant_go_react" down 1
 ```
 
 3 user contoh yang akan ter-seed:
 
-| Role  | Email               | Password      |
-|-------|---------------------|---------------|
-| admin | admin@sekolah.com   | password123   |
-| guru  | guru@sekolah.com    | password123   |
-| siswa | siswa@sekolah.com   | password123   |
+| Role    | Email                  | Password    |
+| ------- | ---------------------- | ----------- |
+| admin   | admin@restaurant.com   | password123 |
+| chef    | chef@restaurant.com    | password123 |
+| cashier | cashier@restaurant.com | password123 |
 
 ---
 
@@ -113,21 +119,21 @@ Server berjalan di `http://localhost:8080`.
 
 ### Endpoint API
 
-| Method | Endpoint                | Akses           | Keterangan                       |
-|--------|--------------------------|-----------------|-----------------------------------|
-| POST   | `/api/auth/login`       | Public          | Login, return JWT bearer token   |
-| GET    | `/api/auth/me`          | Semua role login| Profil user yang sedang login    |
-| GET    | `/api/dashboard`        | Semua role login| Dashboard generik                |
-| GET    | `/api/admin/dashboard`  | admin saja      | Dilindungi `RoleMiddleware`      |
-| GET    | `/api/guru/dashboard`   | guru saja       | Dilindungi `RoleMiddleware`      |
-| GET    | `/api/siswa/dashboard`  | siswa saja      | Dilindungi `RoleMiddleware`      |
+| Method | Endpoint                 | Akses            | Keterangan                     |
+| ------ | ------------------------ | ---------------- | ------------------------------ |
+| POST   | `/api/auth/login`        | Public           | Login, return JWT bearer token |
+| GET    | `/api/auth/me`           | Semua role login | Profil user yang sedang login  |
+| GET    | `/api/dashboard`         | Semua role login | Dashboard generik              |
+| GET    | `/api/admin/dashboard`   | admin saja       | Dilindungi `RoleMiddleware`    |
+| GET    | `/api/chef/dashboard`    | chef saja        | Dilindungi `RoleMiddleware`    |
+| GET    | `/api/cashier/dashboard` | cashier saja     | Dilindungi `RoleMiddleware`    |
 
 Contoh request login:
 
 ```bash
 curl -X POST http://localhost:8080/api/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"email":"admin@sekolah.com","password":"password123"}'
+  -d '{"email":"admin@restaurant.com","password":"password123"}'
 ```
 
 Contoh memanggil endpoint terproteksi:
@@ -137,7 +143,7 @@ curl http://localhost:8080/api/admin/dashboard \
   -H "Authorization: Bearer <token_dari_login>"
 ```
 
-Jika role tidak sesuai (misal siswa mengakses `/api/admin/dashboard`), middleware
+Jika role tidak sesuai (misal cashier mengakses `/api/admin/dashboard`), middleware
 `RoleMiddleware` akan mengembalikan `403 Forbidden`. Jika token tidak dikirim atau
 invalid/expired, `JWTAuthMiddleware` mengembalikan `401 Unauthorized`.
 
@@ -155,6 +161,7 @@ Buka `http://localhost:5173`. Sudah diverifikasi `npm install` dan `npm run buil
 berjalan tanpa error.
 
 Alur frontend:
+
 1. `Login.jsx` submit ke `AuthContext.login()` → memanggil `POST /api/auth/login`.
 2. Token & data user disimpan di `localStorage`, lalu redirect otomatis sesuai role
    (`/admin/dashboard`, `/guru/dashboard`, atau `/siswa/dashboard`).
