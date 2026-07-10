@@ -22,24 +22,20 @@ const ICONS = {
 const MENUS = {
   admin: [
     { name: 'Dashboard', icon: 'dashboard', route: '/admin/dashboard' },
-    { name: 'Data Guru', icon: 'users' },
-    { name: 'Data Siswa', icon: 'users' },
-    { name: 'Data Kelas', icon: 'kelas' },
+    { name: 'Data Karyawan', icon: 'users' },
+    { name: 'Daftar Menu', icon: 'users' },
+    { name: 'Daftar Member', icon: 'kelas' },
     { name: 'Laporan', icon: 'laporan' },
     { name: 'Profil', icon: 'profil' },
   ],
-  guru: [
-    { name: 'Dashboard', icon: 'dashboard', route: '/guru/dashboard' },
-    { name: 'Kelas Saya', icon: 'kelas' },
-    { name: 'Input Nilai', icon: 'book' },
-    { name: 'Presensi Siswa', icon: 'calendar' },
+  chef: [
+    { name: 'Dashboard', icon: 'dashboard', route: '/chef/dashboard' },
+    { name: 'Lihat Order', icon: 'book' },
     { name: 'Profil', icon: 'profil' },
   ],
-  siswa: [
-    { name: 'Dashboard', icon: 'dashboard', route: '/siswa/dashboard' },
-    { name: 'Nilai Saya', icon: 'check' },
-    { name: 'Jadwal Pelajaran', icon: 'calendar' },
-    { name: 'Presensi Saya', icon: 'kelas' },
+  cashier: [
+    { name: 'Dashboard', icon: 'dashboard', route: '/cashier/dashboard' },
+    { name: 'Transaksi', icon: 'book' },
     { name: 'Profil', icon: 'profil' },
   ],
 }

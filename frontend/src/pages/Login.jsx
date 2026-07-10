@@ -4,8 +4,8 @@ import { useAuth } from '../context/AuthContext'
 
 const ROLE_REDIRECT = {
   admin: '/admin/dashboard',
-  guru: '/guru/dashboard',
-  siswa: '/siswa/dashboard',
+  chef: '/chef/dashboard',
+  cashier: '/cashier/dashboard',
 }
 
 export default function Login() {
@@ -87,7 +87,7 @@ export default function Login() {
               <input
                 id="email"
                 type="email"
-                placeholder="nama@sekolah.id"
+                placeholder="nama@smkrestaurant.sch.id"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="username"
@@ -117,11 +117,15 @@ export default function Login() {
 
           <div className="login-hint">
             <strong>Akun contoh (password: password123)</strong>
-            Admin: admin@sekolah.com
+            Admin: admin@smkrestaurant.sch.id
             <br />
-            Guru: guru@sekolah.com
+            Chef 1 : chef1@smkrestaurant.sch.id
             <br />
-            Siswa: siswa@sekolah.com
+            Chef 2 : chef2@smkrestaurant.sch.id
+            <br />
+            Cashier 1 : cashier1@smkrestaurant.sch.id
+            <br />
+            Cashier 2 : cashier2@smkrestaurant.sch.id
           </div>
         </div>
       </div>

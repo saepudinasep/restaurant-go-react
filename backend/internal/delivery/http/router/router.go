@@ -40,7 +40,7 @@ func SetupRouter(jwtService *jwt.JWTService, authUsecase domain.AuthUsecase) *gi
 
 			// dashboard umum: bisa diakses oleh SEMUA role yang sudah login
 			protected.GET("/dashboard", func(c *gin.Context) {
-				dashboardHandler.SiswaDashboard(c) // fallback generic, biasanya frontend redirect sesuai role
+				dashboardHandler.CashierDashboard(c) // fallback generic, biasanya frontend redirect sesuai role
 			})
 
 			// ---- Role-specific routes ----
@@ -50,16 +50,16 @@ func SetupRouter(jwtService *jwt.JWTService, authUsecase domain.AuthUsecase) *gi
 				admin.GET("/dashboard", dashboardHandler.AdminDashboard)
 			}
 
-			guru := protected.Group("/guru")
-			guru.Use(middleware.RoleMiddleware(string(domain.RoleGuru)))
+			chef := protected.Group("/chef")
+			chef.Use(middleware.RoleMiddleware(string(domain.RoleChef)))
 			{
-				guru.GET("/dashboard", dashboardHandler.GuruDashboard)
+				chef.GET("/dashboard", dashboardHandler.ChefDashboard)
 			}
 
-			siswa := protected.Group("/siswa")
-			siswa.Use(middleware.RoleMiddleware(string(domain.RoleSiswa)))
+			cashier := protected.Group("/cashier")
+			cashier.Use(middleware.RoleMiddleware(string(domain.RoleCashier)))
 			{
-				siswa.GET("/dashboard", dashboardHandler.SiswaDashboard)
+				cashier.GET("/dashboard", dashboardHandler.CashierDashboard)
 			}
 		}
 	}

@@ -30,32 +30,32 @@ type ActivityItem struct {
 }
 
 // NOTE: Angka pada stats & activity di bawah ini masih data contoh (belum terhubung ke query MySQL).
-// Struktur response sudah didesain agar tinggal diisi hasil query nyata (COUNT siswa, rata-rata nilai, dst)
+// Struktur response sudah didesain agar tinggal diisi hasil query nyata (COUNT casshier, rata-rata nilai, dst)
 // tanpa perlu mengubah kontrak API atau tampilan frontend.
 
 // AdminDashboard menangani GET /api/admin/dashboard (hanya role admin)
 func (h *DashboardHandler) AdminDashboard(c *gin.Context) {
 	response.Success(c, http.StatusOK, "selamat datang di dashboard admin", gin.H{
 		"stats": []StatCard{
-			{Label: "Total Guru", Value: "12", Sub: "Aktif mengajar", Color: "blue", Icon: "users"},
-			{Label: "Total Siswa", Value: "248", Sub: "6 kelas aktif", Color: "green", Icon: "users"},
+			{Label: "Total Chef", Value: "12", Sub: "Aktif mengajar", Color: "blue", Icon: "users"},
+			{Label: "Total Cashier", Value: "248", Sub: "6 kelas aktif", Color: "green", Icon: "users"},
 			{Label: "Kelas Aktif", Value: "6", Sub: "Tahun ajaran 2025/2026", Color: "amber", Icon: "kelas"},
 			{Label: "Akun Terdaftar", Value: "261", Sub: "Semua role", Color: "blue", Icon: "check"},
 		},
 		"activities": []ActivityItem{
-			{Label: "Guru baru ditambahkan", Sub: "Budi Guru · 2 jam lalu"},
+			{Label: "Chef baru ditambahkan", Sub: "Budi Chef · 2 jam lalu"},
 			{Label: "Kelas baru dibuat", Sub: "Kelas 9C · kemarin"},
-			{Label: "Siswa baru mendaftar", Sub: "Siti Siswa · 2 hari lalu"},
+			{Label: "Cashier baru mendaftar", Sub: "Siti Cashier · 2 hari lalu"},
 		},
 	})
 }
 
-// GuruDashboard menangani GET /api/guru/dashboard (hanya role guru)
-func (h *DashboardHandler) GuruDashboard(c *gin.Context) {
-	response.Success(c, http.StatusOK, "selamat datang di dashboard guru", gin.H{
+// ChefDashboard menangani GET /api/chef/dashboard (hanya role chef)
+func (h *DashboardHandler) ChefDashboard(c *gin.Context) {
+	response.Success(c, http.StatusOK, "selamat datang di dashboard chef", gin.H{
 		"stats": []StatCard{
 			{Label: "Kelas Diampu", Value: "3", Sub: "Semester genap", Color: "blue", Icon: "kelas"},
-			{Label: "Total Siswa", Value: "84", Sub: "Di semua kelas", Color: "green", Icon: "users"},
+			{Label: "Total Cashier", Value: "84", Sub: "Di semua kelas", Color: "green", Icon: "users"},
 			{Label: "Tugas Belum Dinilai", Value: "5", Sub: "Perlu ditindaklanjuti", Color: "amber", Icon: "book"},
 			{Label: "Kehadiran Hari Ini", Value: "92%", Sub: "Kelas 9A", Color: "green", Icon: "calendar"},
 		},
@@ -67,12 +67,12 @@ func (h *DashboardHandler) GuruDashboard(c *gin.Context) {
 	})
 }
 
-// SiswaDashboard menangani GET /api/siswa/dashboard (hanya role siswa)
-func (h *DashboardHandler) SiswaDashboard(c *gin.Context) {
-	response.Success(c, http.StatusOK, "selamat datang di dashboard siswa", gin.H{
+// CashierDashboard menangani GET /api/cashier/dashboard (hanya role cashier)
+func (h *DashboardHandler) CashierDashboard(c *gin.Context) {
+	response.Success(c, http.StatusOK, "selamat datang di dashboard cashier", gin.H{
 		"stats": []StatCard{
-			{Label: "Nilai Rata-rata", Value: "87", Sub: "Semester ini", Color: "blue", Icon: "check"},
-			{Label: "Kehadiran", Value: "96%", Sub: "Bulan ini", Color: "green", Icon: "calendar"},
+			{Label: "Total Transaksi", Value: "120", Sub: "Hari ini", Color: "blue", Icon: "check"},
+			{Label: "Pendapatan", Value: "Rp 1.200.000", Sub: "Hari ini", Color: "green", Icon: "calendar"},
 			{Label: "Tugas Aktif", Value: "2", Sub: "Menunggu dikumpulkan", Color: "amber", Icon: "book"},
 			{Label: "Jadwal Hari Ini", Value: "4", Sub: "Mata pelajaran", Color: "blue", Icon: "kelas"},
 		},

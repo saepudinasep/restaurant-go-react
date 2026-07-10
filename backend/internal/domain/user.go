@@ -7,8 +7,8 @@ type Role string
 
 const (
 	RoleAdmin Role = "admin"
-	RoleGuru  Role = "guru"
-	RoleSiswa Role = "siswa"
+	RoleChef  Role = "chef"
+	RoleCashier Role = "cashier"
 )
 
 // User adalah entity utama (domain model), tidak boleh bergantung pada layer lain

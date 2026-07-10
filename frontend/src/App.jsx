@@ -5,15 +5,15 @@ import GuestRoute from './routes/GuestRoute'
 
 import Login from './pages/Login'
 import DashboardAdmin from './pages/DashboardAdmin'
-import DashboardGuru from './pages/DashboardGuru'
-import DashboardSiswa from './pages/DashboardSiswa'
+import DashboardChef from './pages/DashboardChef'
+import DashboardCashier from './pages/DashboardCashier'
 import { NotFound, Unauthorized } from './pages/NotFound'
 
 function RootRedirect() {
   const { user } = useAuth()
   if (!user) return <Navigate to="/login" replace />
 
-  const map = { admin: '/admin/dashboard', guru: '/guru/dashboard', siswa: '/siswa/dashboard' }
+  const map = { admin: '/admin/dashboard', chef: '/chef/dashboard', cashier: '/cashier/dashboard' }
   return <Navigate to={map[user.role] || '/login'} replace />
 }
 
@@ -43,19 +43,19 @@ export default function App() {
           />
 
           <Route
-            path="/guru/dashboard"
+            path="/chef/dashboard"
             element={
-              <ProtectedRoute allowedRoles={['guru']}>
-                <DashboardGuru />
+              <ProtectedRoute allowedRoles={['chef']}>
+                <DashboardChef />
               </ProtectedRoute>
             }
           />
 
           <Route
-            path="/siswa/dashboard"
+            path="/cashier/dashboard"
             element={
-              <ProtectedRoute allowedRoles={['siswa']}>
-                <DashboardSiswa />
+              <ProtectedRoute allowedRoles={['cashier']}>
+                <DashboardCashier />
               </ProtectedRoute>
             }
           />

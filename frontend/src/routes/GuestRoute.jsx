@@ -3,8 +3,8 @@ import { useAuth } from '../context/AuthContext'
 
 const ROLE_REDIRECT = {
   admin: '/admin/dashboard',
-  guru: '/guru/dashboard',
-  siswa: '/siswa/dashboard',
+  chef: '/chef/dashboard',
+  cashier: '/cashier/dashboard',
 }
 
 // GuestRoute membungkus halaman yang HANYA boleh diakses jika belum login (misal: /login).
